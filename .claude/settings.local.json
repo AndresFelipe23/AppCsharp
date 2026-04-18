@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter devices:*)",
+      "Bash(flutter run:*)",
+      "Bash(flutter emulators:*)",
+      "Bash(flutter build:*)",
+      "Bash(keytool -list:*)",
+      "Bash(\"$JAVA_HOME/bin/keytool\" -list -v -keystore upload-keystore.jks -storepass Soypipe23@)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
