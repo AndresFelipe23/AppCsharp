@@ -5,6 +5,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import '../theme/app_theme.dart';
 import '../services/practicas_service.dart';
 import '../services/progreso_service.dart';
+import '../widgets/csharp_syntax_highlighter.dart';
 
 class PracticaDetalleScreen extends StatefulWidget {
   final int practicaId;
@@ -967,16 +968,18 @@ class _PracticaDetalleScreenState extends State<PracticaDetalleScreen> {
               code: TextStyle(
                 fontFamily: 'monospace',
                 fontSize: 14,
-                backgroundColor: AppTheme.primaryColor.withOpacity(0.1),
-                color: AppTheme.primaryColor,
+                backgroundColor: Colors.transparent,
+                color: const Color(0xFF1F2937),
+                decoration: TextDecoration.none,
               ),
               codeblockDecoration: BoxDecoration(
-                color: const Color(0xFFF7F7FB),
+                color: const Color(0xFFFCFDFF),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppTheme.primaryColor.withOpacity(0.12)),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
               ),
               codeblockPadding: const EdgeInsets.all(12),
             ),
+            syntaxHighlighter: CSharpSyntaxHighlighter(),
           ),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import '../widgets/csharp_syntax_highlighter.dart';
 import '../theme/app_theme.dart';
 import '../services/lecciones_service.dart';
 import '../services/progreso_service.dart';
@@ -318,13 +319,14 @@ class _LeccionDetalleScreenState extends State<LeccionDetalleScreen>
       code: TextStyle(
         fontFamily: 'monospace',
         fontSize: 13.5,
-        backgroundColor: AppTheme.primaryColor.withOpacity(0.1),
-        color: AppTheme.primaryDark,
+        backgroundColor: Colors.transparent,
+        color: const Color(0xFF1F2937),
+        decoration: TextDecoration.none,
       ),
       codeblockDecoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
+        color: const Color(0xFFFCFDFF),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade800),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       codeblockPadding: const EdgeInsets.all(14),
     );
@@ -446,6 +448,7 @@ class _LeccionDetalleScreenState extends State<LeccionDetalleScreen>
                           color: AppTheme.textPrimary,
                         ),
                   ),
+                  syntaxHighlighter: CSharpSyntaxHighlighter(),
                 ),
               ),
             ),
@@ -477,6 +480,7 @@ class _LeccionDetalleScreenState extends State<LeccionDetalleScreen>
       child: MarkdownBody(
         data: data.toString(),
         styleSheet: _markdownLeccion(),
+        syntaxHighlighter: CSharpSyntaxHighlighter(),
       ),
     );
   }

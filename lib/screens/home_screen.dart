@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sliding_clipped_nav_bar/sliding_clipped_nav_bar.dart';
 import '../theme/app_theme.dart';
 import 'inicio_screen.dart';
 import 'progreso_screen.dart';
@@ -26,35 +25,79 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: _screens[_selectedIndex],
-      bottomNavigationBar: SlidingClippedNavBar(
-        backgroundColor: Colors.white,
-        onButtonPressed: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        iconSize: 30,
-        activeColor: AppTheme.primaryColor,
-        selectedIndex: _selectedIndex,
-        barItems: [
-          BarItem(
-            icon: Icons.home_outlined,
-            title: 'Inicio',
+      bottomNavigationBar: SafeArea(
+        minimum: const EdgeInsets.fromLTRB(8, 0, 8, 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(color: const Color(0xFFE2E8F0)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.08),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-          BarItem(
-            icon: Icons.trending_up_outlined,
-            title: 'Progreso',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: NavigationBarTheme(
+              data: NavigationBarThemeData(
+                indicatorColor: AppTheme.primaryColor.withValues(alpha: 0.12),
+                iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((states) {
+                  final selected = states.contains(WidgetState.selected);
+                  return IconThemeData(
+                    color: selected ? AppTheme.primaryColor : AppTheme.primaryColor.withValues(alpha: 0.35),
+                    size: 24,
+                  );
+                }),
+                labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((states) {
+                  final selected = states.contains(WidgetState.selected);
+                  return TextStyle(
+                    color: selected ? AppTheme.primaryColor : AppTheme.primaryColor.withValues(alpha: 0.45),
+                    fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                  );
+                }),
+              ),
+              child: NavigationBar(
+                backgroundColor: Colors.white,
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+                height: 68,
+                labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+                destinations: const [
+                  NavigationDestination(
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home_rounded),
+                    label: 'Inicio',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.trending_up_outlined),
+                    selectedIcon: Icon(Icons.trending_up_rounded),
+                    label: 'Progreso',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.assignment_outlined),
+                    selectedIcon: Icon(Icons.assignment_rounded),
+                    label: 'Ejercicios',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.person_outline),
+                    selectedIcon: Icon(Icons.person_rounded),
+                    label: 'Perfil',
+                  ),
+                ],
+              ),
+            ),
           ),
-          BarItem(
-            icon: Icons.assignment_outlined,
-            title: 'Ejercicios',
-          ),
-          BarItem(
-            icon: Icons.person_outline,
-            title: 'Perfil',
-          ),
-        ],
+        ),
       ),
     );
   }

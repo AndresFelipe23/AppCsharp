@@ -26,9 +26,9 @@ android {
         applicationId = "com.afesdev.aprendecsharp"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        // Versión alineada con pubspec.yaml (1.0.5+5)
-        versionCode = 5
-        versionName = "1.0.5"
+        // Versión alineada con pubspec.yaml (1.0.8+8)
+        versionCode = 8
+        versionName = "1.0.8"
         multiDexEnabled = true
     }
 

@@ -7,8 +7,7 @@ class AppConfig {
   // - Emulador iOS: 'http://localhost:3000'
   //
   // Producción: API pública en aprendecsharp.site
-  static const String baseUrl = 'https://aprendecsharp.site';
-
+  static const String baseUrl = 'https://www.aprendecsharp.site';
   // Timeout para las peticiones HTTP (en segundos)
   static const int httpTimeout = 30;
 }

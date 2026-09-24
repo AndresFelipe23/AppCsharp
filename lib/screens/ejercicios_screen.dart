@@ -336,49 +336,11 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: const Icon(
-                        Icons.psychology_rounded,
-                        color: Colors.white,
-                        size: 26,
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ejercicios interactivos',
-                            style: theme.textTheme.headlineSmall?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: -0.4,
-                                  height: 1.15,
-                                ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Repasa cada lección con retos de opción múltiple, completar código y escritura. '
-                            'Desliza hacia abajo en la lista o pulsa Actualizar para sincronizar.',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.92),
-                                  height: 1.4,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Tooltip(
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isCompact = constraints.maxWidth < 390;
+
+                    final refreshButton = Tooltip(
                       message:
                           'Vuelve a cargar ejercicios y tu progreso desde el servidor. También puedes deslizar hacia abajo en la pantalla.',
                       child: FilledButton.tonalIcon(
@@ -393,8 +355,66 @@ class _EjerciciosScreenState extends State<EjerciciosScreen> {
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                       ),
-                    ),
-                  ],
+                    );
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(
+                                Icons.psychology_rounded,
+                                color: Colors.white,
+                                size: 26,
+                              ),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 2),
+                                child: Text(
+                                  'Ejercicios interactivos',
+                                  style: theme.textTheme.headlineSmall?.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: -0.3,
+                                        height: 1.2,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            if (!isCompact) ...[
+                              const SizedBox(width: 8),
+                              refreshButton,
+                            ],
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Repasa cada lección con retos de opción múltiple, completar código y escritura. '
+                          'Desliza hacia abajo en la lista o pulsa Actualizar para sincronizar.',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                                color: Colors.white.withValues(alpha: 0.96),
+                                height: 1.5,
+                              ),
+                        ),
+                        if (isCompact) ...[
+                          const SizedBox(height: 12),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: refreshButton,
+                          ),
+                        ],
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: 20),
                 Container(
