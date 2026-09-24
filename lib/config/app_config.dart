@@ -12,3 +12,5 @@ class AppConfig {
   // Timeout para las peticiones HTTP (en segundos)
   static const int httpTimeout = 30;
 }
+
+// Prueba para aplicacion
